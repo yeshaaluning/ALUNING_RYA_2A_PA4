@@ -7,14 +7,11 @@ This repository includes Python programs that provide solutions to two (2) probl
 a. Filename: Instru = [“Name”, “GEAS”, “Electronics >70”]; where track is constant as Instrumentation and hometown Luzon <br>
 **Code Process:**
 1. The program creates a new DataFrame Instru by filtering the board DataFrame with multiple conditions:
-The value of Track must be Instrumentation.
+   * The value of Track must be Instrumentation.
+   * The value of Hometown must be Luzon.
+   * The value of Electronics must be greater than 70.
+2. After applying these filters using the & operator, only the columns Name, GEAS, and Electronics are selected.
+3. The resulting subset is stored in the DataFrame Instru.
+4. To improve clarity, the program renames the Electronics column to Electronics >70.
+5. Finally, the Instru DataFrame is displayed, showing the filtered results.
 
-The value of Hometown must be Luzon.
-
-The value of Electronics must be greater than 70.
-
-After applying these filters using the & operator, only the columns Name, GEAS, and Electronics are selected.
-The resulting subset is stored in the DataFrame Instru.
-
-To improve clarity, the program renames the Electronics column to Electronics >70.
-Finally, the Instru DataFrame is displayed, showing the filtered results.
