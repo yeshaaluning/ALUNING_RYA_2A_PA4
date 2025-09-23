@@ -16,20 +16,27 @@ a. Filename: Instru = [“Name”, “GEAS”, “Electronics >70”]; where tra
 5. Finally, the Instru DataFrame is displayed, showing the filtered results.
 
 ```Python
+#Import pandas from the library
 import pandas as pd
 
+#Load and Call the dataset
 board = pd.read_csv('board2.csv')
 board
 
+#Select students with: a.) Math score < 70; b.) Hometown = Visayas; Show only the columns Name, Gender, Track, and Math
 Vis = board.loc[(board['Math'] <70) & (board['Hometown'] == 'Visayas'), 
                 ['Name', 'Gender', 'Track', 'Math']]
 Vis
 
+# Select students with: a.) Track = Instrumentation; b.) Hometown = Luzon; c.) Electronics > 70; Show only the columns Name, GEAS, and Electronics
 Instru = board.loc[(board['Track'] == 'Instrumentation') &
                    (board['Hometown'] == 'Luzon') &
                    (board['Electronics']>70),
                    ['Name', 'GEAS', 'Electronics']]
+
+#Rename the Electronics column to Electronics >70 for clarity
 Instru = Instru.rename(columns={'Electronics': 'Electronics >70'})
+
 Instru
 ```
 
@@ -47,14 +54,21 @@ constant as Mindanao and gender Female <br>
 5. The Mindy DataFrame is then displayed with the chosen conditions applied.
 
 ```Python
+#Add a new column "Average". This computes the mean score of Math, GEAS, Electronics, and Communication
+#axis=1 ensures the average is taken across columns (row-wise)
+board['Average'] = board[['Math', 'GEAS', 'Electronics', 'Communication']].mean(axis=1)
 board['Average'] = board[['Math', 'GEAS', 'Electronics','Communication']].mean(axis=1)
 board
 
+#Select students with: a.) Gender = Female; b.) Hometown = Mindanao; c.) Average >= 55; Show only the columns Name, Track, Electronics, and Average
 Mindy = board.loc[(board['Gender'] == 'Female') & 
                     (board['Hometown'] == 'Mindanao') & 
                     (board['Average'] >= 55), 
                     ['Name', 'Track', 'Electronics', 'Average']]
+
+# Rename the Average column to "Average >=55" for clarity
 Mindy = Mindy.rename(columns={'Average': 'Average >=55'})
+
 Mindy
 ```
 
@@ -73,18 +87,22 @@ Mindy
 ```Python
 import matplotlib.pyplot as plt
 
+#Group the DataFrame by Track and calculate the mean Average score
 track_avg = board.groupby('Track')['Average'].mean()
 
+#Plot a bar graph for average scores by Track
 plt.figure(figsize=(8,5))
 track_avg.plot(kind="bar")
 plt.title('Average Scores by Track')
 plt.ylabel('Average Score')
 plt.xlabel('Track')
-plt.xticks(rotation=-25)
+plt.xticks(rotation=-25)  #rotate labels for readability
 plt.show()
 
+#Group the DataFrame by Gender and calculate the mean Average score
 track_avg = board.groupby('Gender')['Average'].mean()
 
+#Plot a bar graph for average scores by Gender
 plt.figure(figsize=(8,5))
 track_avg.plot(kind="bar")
 plt.title('Average Scores by Gender')
@@ -93,8 +111,10 @@ plt.xlabel('Gender')
 plt.xticks(rotation=-25)
 plt.show()
 
+#Group the DataFrame by Hometown and calculate the mean Average score
 track_avg = board.groupby('Hometown')['Average'].mean()
 
+#Plot a bar graph for average scores by Hometown
 plt.figure(figsize=(8,5))
 track_avg.plot(kind="bar")
 plt.title('Average Scores by Hometown')
