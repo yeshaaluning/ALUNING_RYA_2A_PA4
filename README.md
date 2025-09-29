@@ -1,5 +1,5 @@
 # ALUNING_RYA_2A_PA4
-This repository includes Python programs that provide solutions to three (3) problems from Program Assignment 4: Data Wrangling and Data Visualization. (V2)
+This repository includes Python programs that provide solutions to three (3) problems from Program Assignment 4: Data Wrangling and Data Visualization.
 
 ---
 ## PROBLEM 1
@@ -118,3 +118,4 @@ plt.xlabel('Hometown')
 plt.xticks(rotation=-25)
 plt.show()
 ```
+*Version 2*
